@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mantisQA.iml" filepath="$PROJECT_DIR$/.idea/modules/mantisQA.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mantisQA_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mantisQA_main.iml" group="mantisQA" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mantisQA_test.iml" filepath="$PROJECT_DIR$/.idea/modules/mantisQA_test.iml" group="mantisQA" />
+    </modules>
+  </component>
+</project>
