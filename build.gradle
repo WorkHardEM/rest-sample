@@ -1,14 +1,27 @@
-group 'mantisQA'
-version '1.0-SNAPSHOT'
-
 apply plugin: 'java'
-
-sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'org.testng:testng:6.9.10'
+    compile 'org.seleniumhq.selenium:selenium-java:2.52.0'
+    compile 'org.hamcrest:java-hamcrest:2.0.0.0'
 }
+
+test {
+    useTestNG {
+        suites 'src/test/resources/testng.xml'
+    }
+    if (projects.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if (projects.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+    if (projects.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
+}
+
