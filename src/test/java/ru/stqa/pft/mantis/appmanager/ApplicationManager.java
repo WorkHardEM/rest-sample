@@ -16,10 +16,11 @@ import static org.testng.Assert.fail;
 
 public class ApplicationManager {
   private final Properties properties;
-  WebDriver driver;
+  private WebDriver driver;
 
   private StringBuffer verificationErrors = new StringBuffer();
   private String browser;
+  private RegistrationHelper registrationHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -29,23 +30,15 @@ public class ApplicationManager {
   public void init() throws IOException {
     String target = System.getProperty("target", "qa");
     properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
-
-    if (browser.equals(BrowserType.CHROME)) {
-      driver = new ChromeDriver();
-    } else if (browser.equals(BrowserType.FIREFOX)) {
-      driver = new FirefoxDriver();
-    } else if (browser.equals(BrowserType.IE)) {
-      driver = new InternetExplorerDriver();
-    }
-    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-    driver.get(properties.getProperty("qa.baseUrl"));
   }
 
   public void stop() {
-    driver.quit();
-    String verificationErrorString = verificationErrors.toString();
-    if (!"".equals(verificationErrorString)) {
-      fail(verificationErrorString);
+    if (driver != null) {
+      driver.quit();
+      String verificationErrorString = verificationErrors.toString();
+      if (!"".equals(verificationErrorString)) {
+        fail(verificationErrorString);
+      }
     }
   }
 
@@ -55,5 +48,27 @@ public class ApplicationManager {
 
   public String getProperty(String key) {
     return properties.getProperty(key);
+  }
+
+  public RegistrationHelper registration() {
+    if (registrationHelper == null) {
+      registrationHelper = new RegistrationHelper(this);
+    }
+    return registrationHelper;
+  }
+
+  public WebDriver getDriver() {
+    if (driver == null) {
+      if (browser.equals(BrowserType.CHROME)) {
+        driver = new ChromeDriver();
+      } else if (browser.equals(BrowserType.FIREFOX)) {
+        driver = new FirefoxDriver();
+      } else if (browser.equals(BrowserType.IE)) {
+        driver = new InternetExplorerDriver();
+      }
+      driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+      driver.get(properties.getProperty("qa.baseUrl"));
+    }
+    return driver;
   }
 }
