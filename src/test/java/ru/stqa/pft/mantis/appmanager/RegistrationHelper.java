@@ -13,6 +13,6 @@ public class RegistrationHelper {
   }
 
   public void start(String username, String email) {
-    driver.get(app.getProperty("qa.baseUrl") + "/login_page.php");
+    driver.get(app.getProperty("qa.baseUrl") + "/signup_page.php");
   }
 }
