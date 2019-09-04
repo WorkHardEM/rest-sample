@@ -9,6 +9,9 @@ dependencies {
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.14.0'
     compile 'org.hamcrest:java-hamcrest:2.0.0.0'
     implementation 'commons-net:commons-net:3.6'
+    implementation 'org.subethamail:subethasmtp:3.1.7'
+    implementation 'ru.lanwen.verbalregex:java-verbal-expressions:1.6'
+    implementation 'ch.qos.logback:logback-classic:1.1.5'
 }
 
 test {
